@@ -1,0 +1,28 @@
+<main class="container">
+  <div class="col-8 col-md-8 col-sm-12 offset-2">
+    <div class="card">
+      <div class="card-header p-0">
+        <h1 class="bg-primary mb-0 p-2 text-light">{{#if editMode}}Editar Tipo de Pokemon{{else}}Creacion de Tipos de Pokemones{{/if}}</h1>
+      </div>
+
+      <div class="card-body">
+        <form id="crear-tipo-form" method="post"
+          action="{{#if editMode}}/tipos/editar-tipo{{else}}/tipos/crear-tipo{{/if}}">
+          <div class="mb-3">
+            <label for="nombreTipo" class="form-label">Nombre del tipo de pokemon</label>
+            <input type="text" class="form-control" id="nombreTipo" name="NombreTipo"
+              value="{{#if editMode}}{{tipo.name}}{{/if}}">
+            <p class="text-danger hidden">Este campo es requerido</p>
+          </div>
+          <a class="btn btn-warning" href="/tipos/home">Volver atras</a>
+          <button type="submit" class="btn btn-primary" id="btn-crear-tipo">{{#if editMode}}Guardar
+            Tipo de Pokemon{{else}}Crear Tipo de Pokemon{{/if}}</button>
+
+          {{#if editMode}}
+          <input type="hidden" name="tipoId" value="{{tipo.id}}">
+          {{/if}}
+        </form>
+      </div>
+    </div>
+  </div>
+</main>

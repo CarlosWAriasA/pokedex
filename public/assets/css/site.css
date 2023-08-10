@@ -1,0 +1,23 @@
+body {
+  background-color: #edf2ff;
+}
+
+.nav-bar-color {
+  background-color: #228be6;
+}
+
+.input-error {
+  border-color: red;
+}
+
+.input-success {
+  border-color: green;
+}
+
+.hidden {
+  display: none;
+}
+
+.show {
+  display: block;
+}

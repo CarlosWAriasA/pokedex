@@ -1,0 +1,48 @@
+<main class="container-fluid">
+  <div class="d-flex gap-5">
+    <div class="w-50 p-2">
+      <p class="mb-0 text-center">filtrar por nombre</p>
+      <form class="d-flex" method="post" action="/buscar-nombre">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="filtroNombre">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+    <div class="w-50 p-2">
+      <p class="mb-0 text-center">filtrar por region</p>
+      <form class="d-flex gap-2" method="post" action="/buscar-region">
+        <select class="form-select" aria-label="Default select example" name="filtroRegion">
+          <option selected>Elegir region</option>
+          {{#each regiones as |region|}}
+          <option value="{{region.id}}">{{region.name}}</option>
+          {{/each}}
+        </select>
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="text-center">
+    <h1>Pokemones en la region de: {{region}}</h1>
+    <a href="/" class="btn btn-primary">Volver al Home</a>
+  </div>
+
+
+  {{#if hasPokemonesRegion}}
+    <div class="d-flex gap-2 flex-wrap">
+      {{#each pokemones as |pokemon|}}
+      <div class="mt-3">
+        <div class="card p-2" style="width: 18rem;">
+          <img src="{{pokemon.imageUrl}}" class="img" alt="{{pokemon.name}}" height="300px">
+          <div class="card-body">
+            <h5 class="card-title">{{pokemon.name}}</h5>
+            <p class="mb-0">Tipo: <span class="fw-bold">{{pokemon.tipo}}</span></p>
+            <p class="card-text">Region: <span class="fw-bold">{{pokemon.region}}</span></p>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  {{else}}
+  <h1 class="text-center mt-5">No hay pokemones en esta region</h1>
+  {{/if}}
+</main>

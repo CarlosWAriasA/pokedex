@@ -1,0 +1,27 @@
+<main class="container">
+  <div class="col-8 col-md-8 col-sm-12 offset-2">
+    <div class="card">
+      <div class="card-header p-0">
+        <h1 class="bg-primary mb-0 p-2 text-light">{{#if editMode}}Editar Region{{else}}Creacion de Regiones{{/if}}</h1>
+      </div>
+
+      <div class="card-body">
+        <form id="crear-region-form" method="post" action="{{#if editMode}}/regiones/editar-region{{else}}/regiones/crear-region{{/if}}">
+          <div class="mb-3">
+            <label for="nombreRegion" class="form-label">Nombre de la region</label>
+            <input type="text" class="form-control" id="nombreRegion" name="NombreRegion"
+              value="{{#if editMode}}{{region.name}}{{/if}}">
+            <p class="text-danger hidden">Este campo es requerido</p>
+          </div>
+          <a class="btn btn-warning" href="/regiones/home">Volver atras</a>
+          <button type="submit" class="btn btn-primary" id="btn-crear-region">{{#if editMode}}Guardar
+            Region{{else}}Crear Region{{/if}}</button>
+
+          {{#if editMode}}
+            <input type="hidden" name="regionId" value="{{region.id}}">
+          {{/if}}
+        </form>
+      </div>
+    </div>
+  </div>
+</main>

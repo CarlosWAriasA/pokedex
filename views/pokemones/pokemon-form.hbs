@@ -1,0 +1,80 @@
+<main class="container">
+  <div class="col-8 col-md-8 col-sm-12 offset-2">
+    {{#if hasRegiones}}
+      {{#if hasTipos}}
+        <div class="card">
+          <div class="card-header p-0">
+            <h1 class="bg-primary mb-0 p-2 text-light">{{#if editMode}}Editar Pokemon{{else}}Creacion de pokemon{{/if}}</h1>
+          </div>
+
+          <div class="card-body">
+            <form id="crear-pokemon-form" method="post" action="{{#if editMode}}/pokemones/editar-pokemon{{else}}/pokemones/crear-pokemon{{/if}}">
+              {{#if editMode}}
+                <div class="d-flex">
+                  <img src="{{pokemon.imageUrl}}" class="img mx-auto" alt="{{pokemon.name}}" height="200px">
+                </div>
+              {{/if}}
+              <div class="mb-3">
+                <label for="nombrePokemon" class="form-label">Nombre del pokemon</label>
+                <input type="text" class="form-control" id="nombrePokemon" name="NombrePokemon" value="{{#if editMode}}{{pokemon.name}}{{/if}}">
+                <p class="text-danger hidden">Este campo es requerido</p>
+              </div>
+              <div class="mb-3">
+                <label for="imagen" class="form-label">Foto del pokemon</label>
+                <input type="text" class="form-control" id="imagenPokemon" name="ImagenPokemon" value="{{#if editMode}}{{pokemon.imageUrl}}{{/if}}">
+                <p class="text-danger hidden">Este campo es requerido</p>
+              </div>
+              <div class="mb-3">
+                <label for="regionPokemon" class="form-label">Region a la que pertenece el pokemon</label>
+                <select id="regionPokemon" class="form-select" aria-label="Default select example" name="RegionPokemon">
+                  {{#if editMode}}
+                  {{else}}
+                    <option value="" selected>Elige una region</option>
+                  {{/if}}
+                  {{#each regiones as |region|}}
+                    {{#if (areEqual region.id ../pokemon.regionId)}}
+                      <option selected value="{{region.id}}">{{region.name}}</option>
+                    {{else}}
+                      <option value="{{region.id}}">{{region.name}}</option>
+                    {{/if}}
+                  {{/each}}
+                </select>
+                <p class="text-danger hidden">Este campo es requerido</p>
+              </div>
+              <div class="mb-3">
+                <label for="tipoPokemon" class="form-label">Tipo primario</label>
+                <select id="tipoPokemon" class="form-select" aria-label="Default select example" name="TipoPokemon">
+                  {{#if editMode}}
+
+                  {{else}}
+                    <option value="" selected>Elige un tipo</option>
+                  {{/if}}
+                  {{#each tipos as |tipo|}}
+                    {{#if (areEqual tipo.id ../pokemon.tipoId)}}
+                      <option selected value="{{tipo.id}}">{{tipo.name}}</option>
+                    {{else}}
+                      <option value="{{tipo.id}}">{{tipo.name}}</option>
+                    {{/if}}
+                  {{/each}}
+                </select>
+                <p class="text-danger hidden">Este campo es requerido</p>
+              </div>
+              <a class="btn btn-warning" href="/pokemones/home">Volver atras</a>
+              <button type="submit" class="btn btn-primary" id="btn-crear-pokemon">{{#if editMode}}Guardar Pokemon{{else}}Crear pokemon{{/if}}</button>
+
+              {{#if editMode}}
+                <input type="hidden" name="pokemonId" value="{{pokemon.id}}">
+              {{/if}}
+            </form>
+          </div>
+        </div>
+      {{else}}
+        <h1 class="text-center mt-5">No hay tipos creados</h1>
+        <a href="/tipos/crear-tipo" class="btn btn-primary mx-auto d-block w-25">Crear nuevo Tipo</a>
+      {{/if}}
+    {{else}}
+      <h1 class="text-center mt-5">No hay regiones creadas</h1>
+      <a href="/regiones/crear-region" class="btn btn-primary mx-auto d-block w-25">Crear nueva Region</a>
+    {{/if}}
+  </div>
+</main>
